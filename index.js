@@ -1,13 +1,16 @@
-var http = require('http')
+//Build a webserver using express
+
+var express = require('express');
 var url = require('url');
+var app = express();
 
-var httpServer = http.createServer(function(req, res) {
+app.get('/', function(req, res){
     var queryObject = url.parse(req.url, true).query;
-    var greeting = queryObject.greeting || 'Default greeting';
-    res.end('This is my first node app!! ' + greeting);
+    var greeting = queryObject.greeting || "Default greeting"
+    res.send('This is my node app with express! ' + greeting);
 });
 
-httpServer.listen(8080, function() {
-    console.log('Server Listening on port 8080');
-});
+app.listen(8080, function(){
+    console.log('Server listening on port 8080');
+})
 
