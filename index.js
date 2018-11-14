@@ -13,9 +13,13 @@ app.get('/', function(req, res){
 
 app.get('/greet/:statement', function(req, res){
     var greeting = req.params.statement || "Default greeting"
-    res.send('This is my node app with express! ' + greeting);
+    res.setHeader('token', 'my.little.secret');
+    res.status(201).send('This is my node app with express! ' + greeting);
 });
 
+app.use(function(req, res){
+    res.status(404).send('Page not found. Try again');
+});
 app.listen(8080, function(){
     console.log('Server listening on port 8080');
 })
