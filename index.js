@@ -3,10 +3,16 @@
 var express = require('express');
 var url = require('url');
 var app = express();
+var morgan = require('morgan');
+
+app.use(morgan('short'));
 
 app.get('/', function(req, res){
-    var queryObject = url.parse(req.url, true).query;
-    var greeting = queryObject.greeting || "Default greeting"
+    res.send('The home page');
+});
+
+app.get('/greet/:statement', function(req, res){
+    var greeting = req.params.statement || "Default greeting"
     res.send('This is my node app with express! ' + greeting);
 });
 
